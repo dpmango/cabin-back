@@ -1,0 +1,3 @@
+class SignupLead < ApplicationRecord
+
+end
