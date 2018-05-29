@@ -1,5 +1,5 @@
 class SignupLead < ApplicationRecord
-  validates :email, presence: true
-  validates_uniqueness_of :email
-  validates_email_format_of :email, :message => 'email format is not correct'
+  validates :email, presence: { message: "Please enter your email" }
+  validates_email_format_of :email, :message => 'Email format is not correct'
+  validates_uniqueness_of :email, :message => 'We have already scheduled an appointment'
 end

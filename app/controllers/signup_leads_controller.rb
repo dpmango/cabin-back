@@ -1,17 +1,5 @@
 class SignupLeadsController < ApplicationController
-  before_action :set_signup_lead, only: [:show, :update, :destroy]
-
-  # GET /signup_leads
-  def index
-    @signup_leads = SignupLead.all
-
-    render json: @signup_leads
-  end
-
-  # GET /signup_leads/1
-  def show
-    render json: @signup_lead
-  end
+  before_action :set_signup_lead, only: [:update]
 
   # POST /signup_leads
   def create
@@ -20,7 +8,7 @@ class SignupLeadsController < ApplicationController
     if @signup_lead.save
       render json: @signup_lead, status: :created, location: @signup_lead
     else
-      render json: @signup_lead.errors, status: :unprocessable_entity
+      render json: { :errors => @signup_lead.errors }
     end
   end
 
@@ -29,18 +17,14 @@ class SignupLeadsController < ApplicationController
     if @signup_lead.update(signup_lead_params)
       render json: @signup_lead
     else
-      render json: @signup_lead.errors, status: :unprocessable_entity
+      render json: { :errors => @signup_lead.errors }
     end
-  end
-
-  # DELETE /signup_leads/1
-  def destroy
-    @signup_lead.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_signup_lead
+      # @signup_lead = SignupLead.find_by(email: params[:id])
       @signup_lead = SignupLead.find(params[:id])
     end
 
