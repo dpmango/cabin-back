@@ -45,3 +45,7 @@ gem 'devise', '> 4.x'
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'validates_email_format_of'
+
+#zapier
+gem 'httparty'
+gem 'dotenv-rails', groups: [:development, :test]
