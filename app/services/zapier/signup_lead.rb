@@ -17,7 +17,9 @@ module Zapier
         company_employees: resource.company_employees,
         company_old: resource.company_old,
         meeting_date: resource.meeting_date,
-        meeting_time: resource.meeting_time
+        meeting_time: resource.meeting_time,
+        pricing_plan: resource.pricing_plan,
+        pricing_options: resource.pricing_options
       }
     end
   end
