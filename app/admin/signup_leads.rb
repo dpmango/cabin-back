@@ -2,7 +2,7 @@ ActiveAdmin.register SignupLead do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :ispending, :email, :phone, :first_name, :last_name, :pricing_plan, :pricing_options, :meeting_date, :meeting_time, :company_name, :company_industry, :company_old, :company_employees
+permit_params :ispending, :isfollowup, :email, :phone, :first_name, :last_name, :pricing_plan, :pricing_options, :meeting_date, :meeting_time, :company_name, :company_industry, :company_old, :company_employees
 
 #
 # or
@@ -15,7 +15,9 @@ permit_params :ispending, :email, :phone, :first_name, :last_name, :pricing_plan
 # end
 
 index do
+  column :id
   column :ispending
+  column :isfollowup
   column :email
   column :phone
   column :first_name

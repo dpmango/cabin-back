@@ -1,9 +1,9 @@
 module Zapier
-  class SignupLead < Zapier::Base
+  class SignupLeadFollowUp < Zapier::Base
     def call_operation
-      puts "SIGNUP LEAD DONE"
+      puts "SIGNUP LEAD FOLLOW UP"
       puts params
-      HTTParty.post(ENV['ZAP_SPACE'], body: params)
+      HTTParty.post(ENV['ZAP_SPACE_FOLLOW'], body: params)
     end
 
     def params
