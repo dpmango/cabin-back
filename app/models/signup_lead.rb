@@ -5,8 +5,11 @@ class SignupLead < ApplicationRecord
 
   after_save :place_to_zapier
 
+  # called when signup is sucessfull
   def place_to_zapier
-    Zapier::SignupLead.new(self).post_to_zapier
+    if self.ispending == false
+      Zapier::SignupLead.new(self).post_to_zapier
+    end
   end
 
 end
