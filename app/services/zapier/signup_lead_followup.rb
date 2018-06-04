@@ -19,7 +19,8 @@ module Zapier
         meeting_date: resource.meeting_date,
         meeting_time: resource.meeting_time,
         pricing_plan: resource.pricing_plan,
-        pricing_options: resource.pricing_options
+        pricing_options: resource.pricing_options,
+        email_instead: resource.email_instead
       }
     end
   end
