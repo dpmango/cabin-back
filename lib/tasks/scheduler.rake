@@ -7,8 +7,10 @@ task :send_followup => :environment do
 
   SignupLead.all.each do |lead|
     if lead.isfollowup === true
-      Zapier::SignupLeadFollowUp.new(lead).post_to_zapier
-      lead.update(isfollowup: false)
+      if lead.updated_at < (Time.now.utc - 1.hour)
+        Zapier::SignupLeadFollowUp.new(lead).post_to_zapier
+        lead.update(isfollowup: false)
+      end
     end
   end
 
