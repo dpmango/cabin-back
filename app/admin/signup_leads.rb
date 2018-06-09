@@ -15,6 +15,7 @@ permit_params :ispending, :isfollowup, :email, :phone, :first_name, :last_name, 
 # end
 
 index do
+  selectable_column
   column :id
   column :ispending
   column :isfollowup
