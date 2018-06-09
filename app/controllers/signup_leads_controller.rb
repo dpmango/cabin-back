@@ -3,11 +3,9 @@ class SignupLeadsController < ApplicationController
 
   # POST /signup_leads
   def create
-    @signup_match = SignupLead.find_by_email(params[:signup_lead][:email])
-    if @signup_match
-      if @signup_match.ispending && @signup_match.isfollowup
-        render json: @signup_match
-      end
+    @signup_match = SignupLead.find_by_email(params[:signup_lead][:email].downcase)
+    if @signup_match && (@signup_match.ispending && @signup_match.isfollowup)
+      render json: @signup_match
     else
       @signup_lead = SignupLead.new(signup_lead_params)
 
