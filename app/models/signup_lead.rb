@@ -7,7 +7,7 @@ class SignupLead < ApplicationRecord
   before_save :email_to_lowercase
 
   def email_to_lowercase
-    self.email = self.email.downcase!
+    self.email = self.email.downcase
   end
   # called when signup is sucessfull
   def place_to_zapier
