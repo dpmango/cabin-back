@@ -49,3 +49,6 @@ gem 'validates_email_format_of'
 #zapier
 gem 'httparty'
 gem 'dotenv-rails', groups: [:development, :test]
+
+# google calendar
+gem 'google-api-client', '~> 0.8'
