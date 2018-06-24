@@ -6,13 +6,9 @@ require 'fileutils'
 
 module Calendar
   class Base
-    APPLICATION_NAME = 'Cabin Backend'.freeze
-    CLIENT_SECRETS_PATH = 'app/services/calendar/client_secret.json'.freeze
-    CREDENTIALS_PATH = 'app/services/calendar/token.yaml'.freeze
-    SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY
+    SCOPES = [Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY]
 
-    def initialize(request)
-      @request = request
+    def initialize
       start
     end
 
@@ -39,8 +35,6 @@ module Calendar
           data["date"] = event.start.date
           data["time"] = event.start.date_time
           filtered_items.push(data)
-          # start = event.start.date || event.start.date_time
-          # puts "- #{event.summary} (#{start})"
         end
 
         response = filtered_items
@@ -68,25 +62,19 @@ module Calendar
     private
 
     def start
-      puts "========== AUTHORIZATION =========="
       # Initialize the API
       calendar = Google::Apis::CalendarV3::CalendarService.new
-      calendar.client_options.application_name = APPLICATION_NAME
       calendar.authorization = authorize
 
       @service = calendar
     end
 
     def authorize
-      client_id = Google::Auth::ClientId.from_file(CLIENT_SECRETS_PATH)
-      token_store = Google::Auth::Stores::FileTokenStore.new(file: CREDENTIALS_PATH)
-      authorizer = Google::Auth::WebUserAuthorizer.new(client_id, SCOPE, token_store, '/oauth2callback')
-      user_id = 'default'
-      credentials = authorizer.get_credentials(user_id, @request)
-      if credentials.nil?
-        raise StandardError, authorizer.get_authorization_url(login_hint: user_id, request: @request)
-      end
-      credentials
+      authorization = Google::Auth.get_application_default(SCOPES)
+      auth_client = authorization.dup
+      auth_client.sub = 'user@example.co' # replace it within email address
+      auth_client.fetch_access_token!
+      auth_client
     end
   end
 end
