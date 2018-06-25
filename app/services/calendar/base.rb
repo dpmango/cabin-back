@@ -73,7 +73,8 @@ module Calendar
     def start
       # Initialize the API
       calendar = Google::Apis::CalendarV3::CalendarService.new
-      calendar.authorization = authorize
+      # calendar.authorization = authorize
+      calendar.key = 'YOUR-API-KEY'
 
       @service = calendar
     end
