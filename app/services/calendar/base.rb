@@ -20,9 +20,6 @@ module Calendar
 
     def get_last_10
       # Fetch the next 10 events for the user
-      # calendar_id = 'primary'
-      # calendar_id = "khmelevskoysergey@gmail.com"
-      # calendar_id = "cu9bavc8vubc33qva5tqi2gh58@group.calendar.google.com"
       result_events = []
       @calendars.each do |calendar_id|
         events = @service.list_events(calendar_id,
@@ -44,9 +41,6 @@ module Calendar
     end
 
     def get_events_on_date(date)
-      # calendar_id = 'primary'
-      # calendar_id = "khmelevskoysergey@gmail.com"
-      # calendar_id = "cu9bavc8vubc33qva5tqi2gh58@group.calendar.google.com"
       time_min = Time.zone.parse(date).to_datetime.rfc3339
       time_max = Time.zone.parse(date).end_of_day.to_datetime.rfc3339
       result_events = []
@@ -73,8 +67,11 @@ module Calendar
     def start
       # Initialize the API
       calendar = Google::Apis::CalendarV3::CalendarService.new
-      # calendar.authorization = authorize
-      calendar.key = 'YOUR-API-KEY'
+      calendar.authorization = authorize
+      #
+      # For public calendars simple API Key authorization is enough
+      #
+      # calendar.key = 'YOUR-API-KEY'
 
       @service = calendar
     end
