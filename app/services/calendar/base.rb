@@ -9,8 +9,8 @@ module Calendar
     SCOPES = [Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY]
     ACTIVE_STATUSES = %w(confirmed tentative)
 
-    def initialize(calendars)
-      @calendars = calendars
+    def initialize
+      @calendars = ["khmelevskoysergey@gmail.com", "cu9bavc8vubc33qva5tqi2gh58@group.calendar.google.com"]
       start
     end
 
@@ -20,23 +20,20 @@ module Calendar
 
     def get_last_10
       # Fetch the next 10 events for the user
-      # calendar_id = 'primary'
-      # calendar_id = "khmelevskoysergey@gmail.com"
-      # calendar_id = "cu9bavc8vubc33qva5tqi2gh58@group.calendar.google.com"
       result_events = []
       @calendars.each do |calendar_id|
         events = @service.list_events(calendar_id,
                                      max_results: 10,
                                      single_events: true,
                                      order_by: 'startTime',
-                                     time_min: Time.now.iso8601)
+                                     time_min: Time.now.utc.to_datetime.rfc3339)
 
         filtered_items = events.items.select{ |event| ACTIVE_STATUSES.include?(event.status) }
         filtered_items.each do |event|
           data = {}
-          data["name"] = event.summary
-          data["date"] = event.start.date
-          data["time"] = event.start.date_time
+          data[:name] = event.summary
+          data[:start] = event.start.date_time.utc
+          data[:end] = event.end.date_time.utc
           result_events << data
         end
       end
@@ -45,8 +42,6 @@ module Calendar
 
     def get_events_on_date(date)
       # calendar_id = 'primary'
-      # calendar_id = "khmelevskoysergey@gmail.com"
-      # calendar_id = "cu9bavc8vubc33qva5tqi2gh58@group.calendar.google.com"
       time_min = Time.zone.parse(date).to_datetime.rfc3339
       time_max = Time.zone.parse(date).end_of_day.to_datetime.rfc3339
       result_events = []
@@ -59,7 +54,7 @@ module Calendar
         filtered_items = events.items.select{ |event| ACTIVE_STATUSES.include?(event.status) }
         filtered_items.each do |event|
           data = {}
-          data['name'] = event.summary
+          data[:name] = event.summary
           data[:start] = event.start.date_time.utc.strftime('%H:%M')
           data[:end]   = event.end.date_time.utc.strftime('%H:%M')
           result_events << data
