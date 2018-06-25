@@ -41,7 +41,6 @@ module Calendar
     end
 
     def get_events_on_date(date)
-      # calendar_id = 'primary'
       time_min = Time.zone.parse(date).to_datetime.rfc3339
       time_max = Time.zone.parse(date).end_of_day.to_datetime.rfc3339
       result_events = []
@@ -69,6 +68,10 @@ module Calendar
       # Initialize the API
       calendar = Google::Apis::CalendarV3::CalendarService.new
       calendar.authorization = authorize
+      #
+      # For public calendars simple API Key authorization is enough
+      #
+      # calendar.key = 'YOUR-API-KEY'
 
       @service = calendar
     end
