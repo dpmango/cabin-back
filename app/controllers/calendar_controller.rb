@@ -7,7 +7,6 @@ class CalendarController < ApplicationController
     render json: @res
   rescue Exception => e
     render json: { error: 'Not authorized', redirect_to: e.message }
-    # redirect_to e.message
   end
 
   # GET /calendar/:date
