@@ -18,7 +18,9 @@ module Calendar
 
     def get_last_10
       # Fetch the next 10 events for the user
-      calendar_id = 'primary'
+      # calendar_id = 'primary'
+      # calendar_id = "khmelevskoysergey@gmail.com"
+      calendar_id = "cu9bavc8vubc33qva5tqi2gh58@group.calendar.google.com"
       events = @service.list_events(calendar_id,
                                      max_results: 10,
                                      single_events: true,
@@ -26,7 +28,7 @@ module Calendar
                                      time_min: Time.now.iso8601)
 
       if events.items.empty?
-        response = 'No upcoming events found' if events.items.empty?
+        response = 'No upcoming events found'
       else
         filtered_items = []
         events.items.each do |event|
@@ -42,7 +44,9 @@ module Calendar
     end
 
     def get_events_on_date(date)
-      calendar_id = 'primary'
+      # calendar_id = 'primary'
+      # calendar_id = "khmelevskoysergey@gmail.com"
+      calendar_id = "cu9bavc8vubc33qva5tqi2gh58@group.calendar.google.com"
       time_min = Time.zone.parse(date).to_datetime.rfc3339
       time_max = Time.zone.parse(date).end_of_day.to_datetime.rfc3339
       events   = @service.list_events(calendar_id,
@@ -72,10 +76,9 @@ module Calendar
     def authorize
       authorization = Google::Auth.get_application_default(SCOPES)
       auth_client = authorization.dup
-      auth_client.sub = 'user@example.co' # replace it within email address
+      auth_client.sub = 'cabin-back@local-bebop-208208.iam.gserviceaccount.com' # replace it within email address
       auth_client.fetch_access_token!
       auth_client
     end
   end
 end
-
