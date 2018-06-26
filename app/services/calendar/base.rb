@@ -1,3 +1,4 @@
+
 require 'google/apis/calendar_v3'
 require 'googleauth'
 require 'googleauth/web_user_authorizer'
@@ -43,6 +44,7 @@ module Calendar
     def get_events_on_date(date)
       time_min = Time.zone.parse(date).to_datetime.rfc3339
       time_max = Time.zone.parse(date).end_of_day.to_datetime.rfc3339
+
       result_events = []
       @calendars.each do |calendar_id|
         events   = @service.list_events(calendar_id,
