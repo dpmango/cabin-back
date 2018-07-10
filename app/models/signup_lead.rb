@@ -11,7 +11,7 @@ class SignupLead < ApplicationRecord
   end
   # called when signup is sucessfull
   def place_to_zapier
-    if self.ispending == false
+    if self.ispending == false && self.isproduction == true
       Zapier::SignupLead.new(self).post_to_zapier
     end
   end
