@@ -35,6 +35,6 @@ class SignupLeadsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def signup_lead_params
-      params.require(:signup_lead).permit(:email, :first_name, :last_name, :company_name, :phone, :company_industry, :company_old, :company_employees, :meeting_date, :meeting_time, :ispending, :pricing_plan, :pricing_options, :email_instead)
+      params.require(:signup_lead).permit(:email, :first_name, :last_name, :company_name, :phone, :company_industry, :company_old, :company_employees, :meeting_date, :meeting_time, :ispending, :isfollowup, :pricing_plan, :pricing_options, :email_instead)
     end
 end
