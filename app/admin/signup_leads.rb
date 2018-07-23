@@ -33,6 +33,7 @@ index do
   column :company_industry
   column :company_old
   column :company_employees
+  column :created_at
 
   actions
 end
