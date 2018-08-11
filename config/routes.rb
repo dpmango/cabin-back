@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get '/calendar/:date', to: 'calendar#show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/oauth2callback', to: 'google#callback'
+  resources :onboardings, only: [:create, :update]
 end
