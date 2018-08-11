@@ -36,7 +36,7 @@ class OnboardingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def onboarding_params
-      params.require(:onboarding).permit(:onboarding_id, :company_uen, :company_name, :company_activity, :company_addres, :company_revenue, :consumers_list, :suppliers_list, :payments_to_list, :payments_from_list, :paidup_capital, :company_relations, :paidup_capital_origins, :shareholders_individulas, :shareholders_corporate, :ispending, :isproduction)
+      params.require(:onboarding).permit(:onboarding_id, :company_uen, :company_name, :company_activity, :company_addres, :company_revenue, :consumers_list, :suppliers_list, :payments_to_list, :payments_from_list, :paidup_capital, :company_relations, :paidup_capital_origins, :shareholders_individulas, :shareholders_corporate, :other_beneficiaries, :other_controllers, :name, :designation, :phone, :email, :ispending, :isproduction)
     end
 
 end
