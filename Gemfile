@@ -55,3 +55,4 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'google-api-client', '~> 0.9'
 
 gem "figaro"
+gem 'knock'
