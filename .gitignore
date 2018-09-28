@@ -17,7 +17,8 @@
 
 .env
 
-config/cabin_server.json
+# config/cabin_server.json
+config/cabin_server_2.json
 
 # Ignore application configuration
 /config/application.yml

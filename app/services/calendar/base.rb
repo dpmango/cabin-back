@@ -1,3 +1,4 @@
+
 require 'google/apis/calendar_v3'
 require 'googleauth'
 require 'googleauth/web_user_authorizer'
@@ -10,7 +11,8 @@ module Calendar
     ACTIVE_STATUSES = %w(confirmed tentative)
 
     def initialize
-      @calendars = ["khmelevskoysergey@gmail.com", "cu9bavc8vubc33qva5tqi2gh58@group.calendar.google.com"]
+      # @calendars = ["khmelevskoysergey@gmail.com", "cu9bavc8vubc33qva5tqi2gh58@group.calendar.google.com"]
+      @calendars = ["rifeng@cabin.com.sg", "rifeng@grain.com.sg", "rifeng.gao@gmail.com"]
       start
     end
 
@@ -30,11 +32,13 @@ module Calendar
 
         filtered_items = events.items.select{ |event| ACTIVE_STATUSES.include?(event.status) }
         filtered_items.each do |event|
-          data = {}
-          data[:name] = event.summary
-          data[:start] = event.start.date_time.utc
-          data[:end] = event.end.date_time.utc
-          result_events << data
+          if event.start.date_time # select only date_time type of events
+            data = {}
+            data[:name] = event.summary
+            data[:start] = event.start.date_time.utc
+            data[:end] = event.end.date_time.utc
+            result_events << data
+          end
         end
       end
       result_events
@@ -43,6 +47,7 @@ module Calendar
     def get_events_on_date(date)
       time_min = Time.zone.parse(date).to_datetime.rfc3339
       time_max = Time.zone.parse(date).end_of_day.to_datetime.rfc3339
+
       result_events = []
       @calendars.each do |calendar_id|
         events   = @service.list_events(calendar_id,
@@ -52,11 +57,13 @@ module Calendar
                                         time_max: time_max)
         filtered_items = events.items.select{ |event| ACTIVE_STATUSES.include?(event.status) }
         filtered_items.each do |event|
-          data = {}
-          data[:name] = event.summary
-          data[:start] = event.start.date_time.utc.strftime('%H:%M')
-          data[:end]   = event.end.date_time.utc.strftime('%H:%M')
-          result_events << data
+          if event.start.date_time # select only date_time type of events
+            data = {}
+            data[:name] = event.summary
+            data[:start] = event.start.date_time.utc.strftime('%H:%M')
+            data[:end]   = event.end.date_time.utc.strftime('%H:%M')
+            result_events << data
+          end
         end
       end
       result_events
@@ -79,7 +86,7 @@ module Calendar
     def authorize
       authorization = Google::Auth.get_application_default(SCOPES)
       auth_client = authorization.dup
-      auth_client.sub = 'cabin-back@local-bebop-208208.iam.gserviceaccount.com' # replace it within email address
+      auth_client.sub = 'cabin-timeslot-booking@mindful-carport-208503.iam.gserviceaccount.com' # replace it within email address
       auth_client.fetch_access_token!
       auth_client
     end

@@ -6,7 +6,7 @@ task :send_followup => :environment do
   require "#{Rails.root}/app/services/zapier/signup_lead_followup.rb"
 
   SignupLead.all.each do |lead|
-    if lead.isfollowup === true
+    if lead.isfollowup === true && lead.isproduction === true
       if lead.updated_at < (Time.now.utc - 1.hour)
         Zapier::SignupLeadFollowUp.new(lead).post_to_zapier
         lead.update(isfollowup: false)

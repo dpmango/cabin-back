@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180604160236) do
+ActiveRecord::Schema.define(version: 20180811153921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,34 @@ ActiveRecord::Schema.define(version: 20180604160236) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "onboardings", force: :cascade do |t|
+    t.string "onboarding_id"
+    t.string "company_uen"
+    t.string "company_name"
+    t.string "company_activity"
+    t.string "company_addres"
+    t.string "company_revenue"
+    t.string "consumers_list"
+    t.string "suppliers_list"
+    t.string "payments_to_list"
+    t.string "payments_from_list"
+    t.string "paidup_capital"
+    t.string "company_relations"
+    t.string "paidup_capital_origins"
+    t.string "shareholders_individulas"
+    t.string "shareholders_corporate"
+    t.boolean "ispending", default: true
+    t.boolean "isproduction", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "other_beneficiaries"
+    t.boolean "other_controllers"
+    t.string "name"
+    t.string "designation"
+    t.string "phone"
+    t.string "email"
+  end
+
   create_table "signup_leads", force: :cascade do |t|
     t.string "email"
     t.string "first_name"
@@ -64,6 +92,7 @@ ActiveRecord::Schema.define(version: 20180604160236) do
     t.string "pricing_options"
     t.boolean "isfollowup", default: true
     t.boolean "email_instead", default: false
+    t.boolean "isproduction", default: false
   end
 
 end
