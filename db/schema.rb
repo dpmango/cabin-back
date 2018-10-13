@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180811153921) do
+ActiveRecord::Schema.define(version: 20181013171718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,21 @@ ActiveRecord::Schema.define(version: 20180811153921) do
     t.string "designation"
     t.string "phone"
     t.string "email"
+    t.string "a_shortname"
+    t.string "a_companycode"
+    t.string "a_corpsecretary"
+    t.string "a_accounting"
+    t.string "a_corpsecretary_name"
+    t.string "a_corpsecretary_id"
+    t.integer "a_status", default: 1
+    t.string "a_action"
+    t.text "a_notes"
+    t.string "a_companyaddress1"
+    t.string "a_companyaddress2"
+    t.string "a_companypostal"
+    t.string "a_acra_address"
+    t.string "a_acra_incorporationdate"
+    t.boolean "isCompleated", default: false
   end
 
   create_table "signup_leads", force: :cascade do |t|
@@ -93,6 +108,14 @@ ActiveRecord::Schema.define(version: 20180811153921) do
     t.boolean "isfollowup", default: true
     t.boolean "email_instead", default: false
     t.boolean "isproduction", default: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
