@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181013171718) do
+ActiveRecord::Schema.define(version: 20181014103930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,11 @@ ActiveRecord::Schema.define(version: 20181013171718) do
     t.string "a_acra_address"
     t.string "a_acra_incorporationdate"
     t.boolean "isCompleated", default: false
+    t.text "shareholders_individulas_array"
+    t.text "shareholders_corporate_array"
+    t.datetime "a_date_fye"
+    t.datetime "a_date_agm"
+    t.datetime "a_date_renewal"
   end
 
   create_table "signup_leads", force: :cascade do |t|

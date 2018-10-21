@@ -5,7 +5,7 @@ class OnboardingsController < ApplicationController
   # TODO - protect with JWT tokens
   def index
     @onboardings = Onboarding.all
-    render json: @onboardings.as_json(:only => [:id, :company_name, :company_uen, :a_corpsecretary, :a_accounting, :a_status, :a_action, :created_at])
+    render json: @onboardings.as_json(:only => [:id, :company_name, :company_uen, :a_corpsecretary, :a_accounting, :a_status, :a_action, :a_date_fye, :a_date_agm, :a_date_renewal, :created_at])
 
   end
 
@@ -49,7 +49,7 @@ class OnboardingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def onboarding_params
-      params.require(:onboarding).permit(:onboarding_id, :company_uen, :company_name, :company_activity, :company_addres, :company_revenue, :consumers_list, :suppliers_list, :payments_to_list, :payments_from_list, :paidup_capital, :company_relations, :paidup_capital_origins, :shareholders_individulas, :shareholders_corporate, :other_beneficiaries, :other_controllers, :name, :designation, :phone, :email, :ispending, :isproduction, :isCompleated, :a_shortname, :a_companycode, :a_corpsecretary, :a_accounting, :a_corpsecretary_name, :a_corpsecretary_id, :a_status, :a_action, :a_notes, :a_companyaddress1, :a_companyaddress2, :a_companypostal, :a_acra_address, :a_acra_incorporationdate)
+      params.require(:onboarding).permit(:onboarding_id, :company_uen, :company_name, :company_activity, :company_addres, :company_revenue, :consumers_list, :suppliers_list, :payments_to_list, :payments_from_list, :paidup_capital, :company_relations, :paidup_capital_origins, :shareholders_individulas, :shareholders_corporate, :other_beneficiaries, :other_controllers, :name, :designation, :phone, :email, :ispending, :isproduction, :isCompleated, :a_shortname, :a_companycode, :a_corpsecretary, :a_accounting, :a_corpsecretary_name, :a_corpsecretary_id, :a_status, :a_action, :a_notes, :a_companyaddress1, :a_companyaddress2, :a_companypostal, :a_acra_address, :a_acra_incorporationdate, :shareholders_individulas_array, :shareholders_corporate_array, :a_date_fye, :a_date_agm, :a_date_renewal )
     end
 
 end
