@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181021175617) do
+ActiveRecord::Schema.define(version: 20181021200507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,20 @@ ActiveRecord::Schema.define(version: 20181021175617) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "stakeholder_id"
+    t.text "upload_id"
+    t.text "upload_passport"
+    t.text "upload_address"
+    t.string "relation"
+    t.boolean "isDirector", default: false
+    t.boolean "isShareholder", default: false
+    t.string "nomineeDirector"
+    t.string "agent"
+    t.string "grounds"
+    t.string "shareholderOnBehalf"
+    t.string "offence"
+    t.string "bankrupt"
+    t.string "pep"
+    t.string "designation"
   end
 
   create_table "users", force: :cascade do |t|
